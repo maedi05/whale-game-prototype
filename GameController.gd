@@ -1,5 +1,5 @@
 class_name GameController extends Node
-
+# HI B)
 func _ready() -> void:
 	Global.game_controller = self
 
