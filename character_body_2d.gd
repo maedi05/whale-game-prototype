@@ -96,3 +96,4 @@ func visible_on_ground_anims(direction: float) -> void:
 				animated_sprite.play("Walk")
 		else:
 			animated_sprite.play("Idle") 
+#this is the climbing branch
