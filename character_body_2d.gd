@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-
+#hi
 #Player animations
 @onready var animated_sprite = $AnimatedSprite2D
 
