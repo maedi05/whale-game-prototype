@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dsbksiqul2uag"]
+
+[ext_resource type="Script" uid="uid://b3q24or7b3q2i" path="res://GameController.gd" id="1_0f027"]
+
+[node name="GameController" type="Node" unique_id=1034732389]
+script = ExtResource("1_0f027")
+
+[node name="World2D" type="Node2D" parent="." unique_id=40670916]
+
+[node name="GUI" type="Control" parent="." unique_id=1024831121]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
