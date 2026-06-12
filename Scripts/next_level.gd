@@ -1,6 +1,6 @@
 extends Area2D
 
-const FILE_BEGIN = "res://Scenes/test_level_" #change that later pls
+const FILE_BEGIN = "res://Scenes/test_level_" #change that later pls to the finished level name
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
