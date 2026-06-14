@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bfomco7lrc2bb"]
 
 [ext_resource type="PackedScene" uid="uid://sn1uto0xov4" path="res://Scenes/floor_placeholder.tscn" id="1_qpu34"]
-[ext_resource type="PackedScene" uid="uid://b87rky5e23h4p" path="res://Scenes/character.tscn" id="2_kn8tv"]
+[ext_resource type="PackedScene" uid="uid://b87rky5e23h4p" path="res://Scenes/PlayerScene.tscn" id="2_kn8tv"]
 [ext_resource type="PackedScene" uid="uid://dkp625rebthqi" path="res://Scenes/NextLevel.tscn" id="3_kn8tv"]
 
 [node name="Scene2" type="Node2D" unique_id=1655639109]

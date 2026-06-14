@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b87rky5e23h4p"]
 
-[ext_resource type="Script" uid="uid://ct1bbwqhdd7c8" path="res://character_body_2d.gd" id="1_ushfy"]
+[ext_resource type="Script" uid="uid://ct1bbwqhdd7c8" path="res://Player.gd" id="1_ushfy"]
 [ext_resource type="Texture2D" uid="uid://bpdy4diieq11x" path="res://Sprites/PlayerAnimations/Dash/IMG_2916.png" id="2_q5mnj"]
 [ext_resource type="Texture2D" uid="uid://bpb8wskwf8ixo" path="res://Sprites/PlayerAnimations/Idle/IMG_2904.png" id="2_reotu"]
 [ext_resource type="Texture2D" uid="uid://brwb5n21helwy" path="res://Sprites/PlayerAnimations/Jump/IMG_2907.png" id="3_kq7hj"]
@@ -17,10 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://dqu7bi3iyrf7c" path="res://Sprites/PlayerAnimations/Run/IMG_2912.png" id="11_s7tkn"]
 [ext_resource type="Texture2D" uid="uid://bomopxqkcsh0p" path="res://Sprites/PlayerAnimations/Run/IMG_2913.png" id="12_nw3qc"]
 [ext_resource type="Texture2D" uid="uid://8d0r7qr0o2jm" path="res://Sprites/PlayerAnimations/Run/IMG_2914.png" id="13_rtvxd"]
-
-[sub_resource type="Curve" id="Curve_ushfy"]
-_data = [Vector2(0.0046801865, 0.99763155), 0.0, 0.0, 0, 0, Vector2(1, 0.3984332), -1.36108, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ptq8"]
 size = Vector2(94.31581, 193.71683)
@@ -101,22 +97,23 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=2041452050 groups=["Player"]]
-script = ExtResource("1_ushfy")
-dash_curve = SubResource("Curve_ushfy")
+[node name="PlayerScene" type="Node2D" unique_id=1156427373]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=920271252]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1477043182 groups=["Player"]]
+script = ExtResource("1_ushfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=920271252]
 position = Vector2(0, -6.622583)
 scale = Vector2(0.14843747, 0.14843747)
 shape = SubResource("RectangleShape2D_4ptq8")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=655433204]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=655433204]
 zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287188519]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=287188519]
 position = Vector2(-0.99999994, -10.000001)
 scale = Vector2(0.030937497, 0.030937497)
 sprite_frames = SubResource("SpriteFrames_le1tg")
-animation = &"Dash"
+animation = &"Idle"
