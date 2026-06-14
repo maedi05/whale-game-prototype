@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dr8jd5y7e3a44"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_ushfy"]
+[ext_resource type="Texture2D" uid="uid://bpdy4diieq11x" path="res://Sprites/PlayerAnimations/Dash/IMG_2916.png" id="2_q5mnj"]
+[ext_resource type="Texture2D" uid="uid://bpb8wskwf8ixo" path="res://Sprites/PlayerAnimations/Idle/IMG_2904.png" id="2_reotu"]
+[ext_resource type="Texture2D" uid="uid://brwb5n21helwy" path="res://Sprites/PlayerAnimations/Jump/IMG_2907.png" id="3_kq7hj"]
+[ext_resource type="Texture2D" uid="uid://du13c8vnpxaae" path="res://Sprites/PlayerAnimations/Dash/IMG_2917.png" id="3_w85my"]
+[ext_resource type="Texture2D" uid="uid://b4ba7chwtdju" path="res://Sprites/PlayerAnimations/Jump/IMG_2908.png" id="4_7iw6i"]
+[ext_resource type="Texture2D" uid="uid://dnmf1y732lfbu" path="res://Sprites/PlayerAnimations/Dash/IMG_2918.png" id="4_et0tf"]
+[ext_resource type="Texture2D" uid="uid://c0x1uhuecbbsx" path="res://Sprites/PlayerAnimations/Walk/IMG_2904.png" id="4_wbia7"]
+[ext_resource type="Texture2D" uid="uid://d2una21xs0iqu" path="res://Sprites/PlayerAnimations/Walk/IMG_2905.png" id="5_kq7hj"]
+[ext_resource type="Texture2D" uid="uid://go64difvgqh3" path="res://Sprites/PlayerAnimations/Jump/IMG_2909.png" id="5_l1rcp"]
+[ext_resource type="Texture2D" uid="uid://b4mn4nj5vsi35" path="res://Sprites/PlayerAnimations/Walk/IMG_2906.png" id="6_7iw6i"]
+[ext_resource type="Texture2D" uid="uid://cga6fg43adhui" path="res://Sprites/PlayerAnimations/Jump/IMG_2910.png" id="6_le1tg"]
+[ext_resource type="Texture2D" uid="uid://1pn10v5fa0rd" path="res://Sprites/PlayerAnimations/Walk/IMG_2903.png" id="7_l1rcp"]
+[ext_resource type="Texture2D" uid="uid://ch87i4t4ex2pd" path="res://Sprites/PlayerAnimations/Run/IMG_2911.png" id="10_hgna0"]
+[ext_resource type="Texture2D" uid="uid://dqu7bi3iyrf7c" path="res://Sprites/PlayerAnimations/Run/IMG_2912.png" id="11_s7tkn"]
+[ext_resource type="Texture2D" uid="uid://bomopxqkcsh0p" path="res://Sprites/PlayerAnimations/Run/IMG_2913.png" id="12_nw3qc"]
+[ext_resource type="Texture2D" uid="uid://8d0r7qr0o2jm" path="res://Sprites/PlayerAnimations/Run/IMG_2914.png" id="13_rtvxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ptq8"]
+size = Vector2(94.31581, 193.71683)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_le1tg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q5mnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w85my")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_et0tf")
+}],
+"loop": false,
+"name": &"Dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_reotu")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kq7hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7iw6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_l1rcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_le1tg")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_hgna0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_s7tkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_nw3qc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_rtvxd")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wbia7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kq7hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7iw6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l1rcp")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="PlayerScene" type="Node2D" unique_id=1156427373]
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1477043182 groups=["Player"]]
+script = ExtResource("1_ushfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=920271252]
+position = Vector2(0, -6.622583)
+scale = Vector2(0.14843747, 0.14843747)
+shape = SubResource("RectangleShape2D_4ptq8")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=655433204]
+zoom = Vector2(3, 3)
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=287188519]
+position = Vector2(-0.99999994, -10.000001)
+scale = Vector2(0.030937497, 0.030937497)
+sprite_frames = SubResource("SpriteFrames_le1tg")
+animation = &"Idle"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1655588334]
+position = Vector2(12, -11)

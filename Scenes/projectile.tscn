@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://56w3f8goc2vh"]
+
+[ext_resource type="Texture2D" uid="uid://dcxdd5pc2dbem" path="res://Sprites/attack placeholder.png" id="1_f8cdk"]
+[ext_resource type="Script" uid="uid://cntyh3dl02avi" path="res://Scripts/projectile.gd" id="1_yr2qt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr2qt"]
+radius = 7.869838
+height = 15.739676
+
+[node name="Projectile" type="CharacterBody2D" unique_id=1821790533]
+script = ExtResource("1_yr2qt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=45353801]
+scale = Vector2(0.12312499, 0.12706742)
+shape = SubResource("CapsuleShape2D_yr2qt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1331314261]
+position = Vector2(-4.7683716e-07, -9.536743e-07)
+scale = Vector2(0.0031250005, 0.0037500004)
+texture = ExtResource("1_f8cdk")
