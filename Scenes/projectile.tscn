@@ -10,9 +10,11 @@ height = 554.0
 [node name="Projectile" type="CharacterBody2D" unique_id=1821790533]
 script = ExtResource("1_yr2qt")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1331314261]
-position = Vector2(0, 7)
-texture = ExtResource("1_f8cdk")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=45353801]
+position = Vector2(0, 6.0590466e-08)
+scale = Vector2(0.12312499, 0.12706742)
 shape = SubResource("CapsuleShape2D_yr2qt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1331314261]
+scale = Vector2(0.12312499, 0.12706742)
+texture = ExtResource("1_f8cdk")

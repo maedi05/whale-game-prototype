@@ -7,8 +7,7 @@ class_name Player
 @onready var animated_sprite = $AnimatedSprite2D
 
 #Projectile stuff... and to spawn projectiles in the PlayerScene node as a child? ig?
-@onready var PlayerScene = get_tree().get_root().get_node("PlayerScene")
-@onready var projectile = load("res://Scenes/projectile.tscn") #to preload the bullet/ aka attack thingy. If you move it then redo this path thingy
+const PROJECTILE = preload("res://Scenes/projectile.tscn") #to preload the bullet/ aka attack thingy. If you move it then redo this path thingy
 
 #Player movement
 @export var walk_speed = 150.0
@@ -31,6 +30,9 @@ var is_dashing = false
 var dash_start_position = 0
 var dash_direction = 0
 var dash_timer =0
+
+func _ready() -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Dash > Normal movement | Air > Floor
@@ -77,7 +79,9 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.flip_h = direction < 0
 		else:
 			velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
-		
+	
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
 	# Funny thing to avoid stepping on each other :D
 	update_animations(direction)
 
@@ -101,15 +105,16 @@ func visible_on_ground_anims(direction: float) -> void:
 			animated_sprite.play("Idle") 
 #this is the climbing branch
 
-func _ready():
-	shoot()
 #shooting projectile(s) hehe
 func shoot():
-	var instance = projectile.instantiate()
+	var instance = PROJECTILE.instantiate()
 	instance.dir = rotation
 	instance.spawnPos = global_position
 	instance.spawnRot = rotation
-	PlayerScene.add_child.call_deferred(instance)
+	if owner:
+		owner.add_child.call_deferred(instance)
+	else:
+		get_tree().root.add_child.call_deferred(instance)
 
 #func _on_cooldown_timeout():
 	#shoot()

@@ -36,7 +36,7 @@ position = Vector2(172, 25)
 scale = Vector2(1, 0.3984375)
 shape = SubResource("RectangleShape2D_f7g2b")
 
-[node name="Character" parent="." unique_id=2041452050 instance=ExtResource("2_pu8o7")]
+[node name="PlayerScene" parent="." unique_id=2041452050 instance=ExtResource("2_pu8o7")]
 
 [node name="NextLevel" parent="." unique_id=1202534979 instance=ExtResource("3_ok5u4")]
 position = Vector2(276, -262)
