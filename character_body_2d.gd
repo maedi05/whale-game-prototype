@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 class_name Player
 
-#hi
+#attacks or bullets or whatever idk
+const BULLET = preload("res://Scenes/Bullet/bullet.tscn")
+
 #Player animations
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -79,6 +81,13 @@ func _physics_process(delta: float) -> void:
 	update_animations(direction)
 
 	move_and_slide()
+
+#bullet stuff idk what i am doing this guy aint explaining shit
+func shooting(delta: float) -> void:
+	if.Input.is_action_just_pressed("shoot"):
+		var bullet_instance = BULLET.instantiate()
+		get_tree().root.add_child(bullet_instance)
+		
 
 func update_animations(direction: float) -> void:
 	if is_dashing:
