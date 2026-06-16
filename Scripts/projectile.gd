@@ -1,5 +1,4 @@
-extends CharacterBody2D
+extends Area2D
 
-
-
-	
+func _process(delta):
+	position.x += 300 * delta

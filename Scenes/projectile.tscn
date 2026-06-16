@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://ctwy0qbpqbi1o" path="res://Scripts/projectile.gd" id="1_yr2qt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr2qt"]
-radius = 174.0
-height = 554.0
+radius = 40.60914
+height = 146.1929
 
-[node name="Projectile" type="CharacterBody2D" unique_id=1821790533]
+[node name="Projectile" type="Area2D" unique_id=679495636]
 script = ExtResource("1_yr2qt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=45353801]
@@ -16,5 +16,6 @@ scale = Vector2(0.12312499, 0.12706742)
 shape = SubResource("CapsuleShape2D_yr2qt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1331314261]
-scale = Vector2(0.12312499, 0.12706742)
+position = Vector2(0, -9.536743e-07)
+scale = Vector2(0.031093746, 0.03114185)
 texture = ExtResource("1_f8cdk")

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bcducmjb3ydn0"]
 
+[ext_resource type="Script" uid="uid://hnj73o283ddh" path="res://Scenes/level_script1.gd" id="1_pu8o7"]
 [ext_resource type="Texture2D" uid="uid://d1h7mli4rvcrg" path="res://icon.svg" id="1_yq4yk"]
 [ext_resource type="PackedScene" uid="uid://b87rky5e23h4p" path="res://Scenes/PlayerScene.tscn" id="2_pu8o7"]
 [ext_resource type="PackedScene" uid="uid://dkp625rebthqi" path="res://Scenes/NextLevel.tscn" id="3_ok5u4"]
@@ -11,6 +12,7 @@ size = Vector2(128, 124.71795)
 size = Vector2(20, 252)
 
 [node name="Scene1" type="Node2D" unique_id=1432909756]
+script = ExtResource("1_pu8o7")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=366828304]
 
@@ -53,3 +55,7 @@ texture = ExtResource("1_yq4yk")
 position = Vector2(0, -125.55334)
 scale = Vector2(1, 0.964427)
 shape = SubResource("RectangleShape2D_yq4yk")
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=1567613278]
+
+[connection signal="shoot" from="PlayerScene" to="." method="_on_player_scene_shoot"]

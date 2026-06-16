@@ -18,9 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://bomopxqkcsh0p" path="res://Sprites/PlayerAnimations/Run/IMG_2913.png" id="12_nw3qc"]
 [ext_resource type="Texture2D" uid="uid://8d0r7qr0o2jm" path="res://Sprites/PlayerAnimations/Run/IMG_2914.png" id="13_rtvxd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ptq8"]
-size = Vector2(94.31581, 193.71683)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_le1tg"]
 animations = [{
 "frames": [{
@@ -97,23 +94,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="PlayerScene" type="Node2D" unique_id=1156427373]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye8ic"]
+radius = 31.14162
+height = 175.15793
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1477043182 groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1477043182 groups=["Player"]]
 script = ExtResource("1_ushfy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=920271252]
-position = Vector2(0, -6.622583)
-scale = Vector2(0.14843747, 0.14843747)
-shape = SubResource("RectangleShape2D_4ptq8")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=655433204]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=655433204]
 zoom = Vector2(3, 3)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=287188519]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=287188519]
 position = Vector2(-0.99999994, -10.000001)
 scale = Vector2(0.030937497, 0.030937497)
 sprite_frames = SubResource("SpriteFrames_le1tg")
 animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=920271252]
+position = Vector2(0, -5.0000005)
+scale = Vector2(0.14843747, 0.14843747)
+shape = SubResource("CapsuleShape2D_ye8ic")
+
+[node name="PlayerScene" type="Node2D" parent="." unique_id=1156427373]

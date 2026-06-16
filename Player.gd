@@ -8,7 +8,8 @@ class_name Player
 
 #bullet stuff idk
 var facing_right := true
-var direction_x := 0.0
+
+signal shoot(pos: Vector2)
 
 #Player movement
 @export var walk_speed = 150.0
@@ -68,7 +69,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = dash_direction * dash_speed * curve_factor
 			velocity.y = 0
 	else:
-		# Handle jump.
+		#jump.
 		if Input.is_action_just_pressed("jump") and (is_on_floor() or is_on_wall()):
 			velocity.y = jump_force
 		
@@ -91,6 +92,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
 	
+	#shoot projectile pls i am begging T.T
+	if Input.is_action_just_pressed("shoot"):
+		shoot.emit(global_position)
+		
 	
 	# Funny thing to avoid stepping on each other :D
 	update_animations(direction)
