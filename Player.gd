@@ -6,8 +6,9 @@ class_name Player
 #Player animations
 @onready var animated_sprite = $AnimatedSprite2D
 
-#Projectile stuff... and to spawn projectiles in the PlayerScene node as a child? ig?
-const PROJECTILE = preload("res://Scenes/projectile.tscn") #to preload the bullet/ aka attack thingy. If you move it then redo this path thingy
+#bullet stuff idk
+var facing_right := true
+var direction_x := 0.0
 
 #Player movement
 @export var walk_speed = 150.0
@@ -31,8 +32,12 @@ var dash_start_position = 0
 var dash_direction = 0
 var dash_timer =0
 
+
+
 func _ready() -> void:
 	pass
+
+	
 
 func _physics_process(delta: float) -> void:
 	# Dash > Normal movement | Air > Floor
@@ -45,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Input direction
 	var direction := Input.get_axis	("left", "right")
-
+		
 	#Dash activation
 	if Input.is_action_just_pressed("dash") and direction != 0 and not is_dashing and dash_timer <= 0:
 		is_dashing = true
@@ -77,11 +82,16 @@ func _physics_process(delta: float) -> void:
 		if direction != 0:
 			velocity.x = move_toward(velocity.x, direction * current_max_speed, current_max_speed * acceleration)
 			animated_sprite.flip_h = direction < 0
+			if direction < 0:
+				facing_right = false
+				print(facing_right)
+			else:
+				facing_right = true
+				print(facing_right)
 		else:
 			velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
 	
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	
 	# Funny thing to avoid stepping on each other :D
 	update_animations(direction)
 
@@ -104,17 +114,3 @@ func visible_on_ground_anims(direction: float) -> void:
 		else:
 			animated_sprite.play("Idle") 
 #this is the climbing branch
-
-#shooting projectile(s) hehe
-func shoot():
-	var instance = PROJECTILE.instantiate()
-	instance.dir = rotation
-	instance.spawnPos = global_position
-	instance.spawnRot = rotation
-	if owner:
-		owner.add_child.call_deferred(instance)
-	else:
-		get_tree().root.add_child.call_deferred(instance)
-
-#func _on_cooldown_timeout():
-	#shoot()
