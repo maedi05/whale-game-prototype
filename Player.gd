@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
+const PROJECTILE = preload("res://Scenes/projectile.tscn")
 #hi
 #Player animations
 @onready var animated_sprite = $AnimatedSprite2D
@@ -94,7 +95,14 @@ func _physics_process(delta: float) -> void:
 	
 	#shoot projectile pls i am begging T.T
 	if Input.is_action_just_pressed("shoot"):
-		shoot.emit(global_position)
+		var projectile = PROJECTILE.instantiate()
+		if "facing_right" in projectile:
+			projectile.facing_right = facing_right
+		if owner:
+			owner.add_child(projectile)
+		else:
+			get_tree().current_scene.add_child(projectile)
+		projectile.global_position = global_position
 		
 	
 	# Funny thing to avoid stepping on each other :D
