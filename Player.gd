@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 class_name Player
+const PROJECTILE = preload("res://Scenes/projectile.tscn")
 
 #hi
 #Player animations
@@ -9,7 +10,7 @@ class_name Player
 #bullet stuff idk
 var facing_right := true
 
-signal shoot(pos: Vector2)
+signal shoot(pos: Vector2, direction: bool)
 
 #Player movement
 @export var walk_speed = 150.0
@@ -93,9 +94,17 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
 	
 	#shoot projectile pls i am begging T.T
+	#if Input.is_action_just_pressed("shoot"):
+		#shoot.emit(global_position, facing_right) #when activated gives the level info about position and if facing right is true or not :)
 	if Input.is_action_just_pressed("shoot"):
-		shoot.emit(global_position)
-		
+		var projectile = PROJECTILE.instantiate()
+		if "facing_right" in projectile:
+			projectile.facing_right = facing_right
+		if owner:
+			owner.add_child(projectile)
+		else:
+			get_tree().current_scene.add_child(projectile)
+		projectile.global_position = global_position
 	
 	# Funny thing to avoid stepping on each other :D
 	update_animations(direction)
