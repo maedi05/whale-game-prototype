@@ -14,6 +14,7 @@ func _process(delta):
 	position.x += 300 * delta * direction
 	
 func _on_body_entered(body: Node2D) -> void:
+	print("Hit!", body.name)
 	if body is Player:
 		return 
 	queue_free()
