@@ -104,7 +104,8 @@ func _physics_process(delta: float) -> void:
 			owner.add_child(projectile)
 		else:
 			get_tree().current_scene.add_child(projectile)
-		projectile.global_position = global_position + Vector2(16 * direction,0)
+		var spawn_offset = 16.0 if facing_right else -16.0
+		projectile.global_position = global_position + Vector2(spawn_offset, 0)
 	
 	# Funny thing to avoid stepping on each other :D
 	update_animations(direction)
