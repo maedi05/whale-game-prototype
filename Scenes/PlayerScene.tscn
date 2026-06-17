@@ -18,6 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://bomopxqkcsh0p" path="res://Sprites/PlayerAnimations/Run/IMG_2913.png" id="12_nw3qc"]
 [ext_resource type="Texture2D" uid="uid://8d0r7qr0o2jm" path="res://Sprites/PlayerAnimations/Run/IMG_2914.png" id="13_rtvxd"]
 
+[sub_resource type="Curve" id="Curve_ye8ic"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3502043), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_le1tg"]
 animations = [{
 "frames": [{
@@ -100,6 +104,7 @@ height = 175.15793
 
 [node name="Player" type="CharacterBody2D" unique_id=1477043182 groups=["Player"]]
 script = ExtResource("1_ushfy")
+dash_curve = SubResource("Curve_ye8ic")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=655433204]
 zoom = Vector2(3, 3)
@@ -111,6 +116,7 @@ position = Vector2(-0.99999994, -10.000001)
 scale = Vector2(0.030937497, 0.030937497)
 sprite_frames = SubResource("SpriteFrames_le1tg")
 animation = &"Idle"
+autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=920271252]
 position = Vector2(0, -5.0000005)
