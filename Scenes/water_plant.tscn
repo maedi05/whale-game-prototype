@@ -6,6 +6,17 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vum3w"]
 shader = ExtResource("2_ayx25")
+shader_parameter/blink_color = Color(8.278489e-06, 0.84232736, 0.631718, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/thickness = 28.2610013423975
+shader_parameter/ring_count = 16
+shader_parameter/ring_offset = 0.0
+shader_parameter/outline_color = Color(0.8764527, 0, 0.3647657, 1)
+shader_parameter/border_clipping_fix = true
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/square_border = false
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/max_or_add = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vum3w"]
 radius = 16.0
