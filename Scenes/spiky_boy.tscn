@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dmnfwi6rxtkfw"]
+
+[ext_resource type="Script" uid="uid://cscw1lu3vhv3s" path="res://Scripts/spiky_boy.gd" id="1_6y01r"]
+[ext_resource type="Texture2D" uid="uid://dltetgoxkl7o7" path="res://Sprites/Game elements/Animals/spiky boy.png" id="1_wxtq5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxtq5"]
+radius = 38.0
+height = 92.0
+
+[node name="SpikyGuy" type="Area2D" unique_id=1837700017]
+collision_layer = 4
+collision_mask = 19
+script = ExtResource("1_6y01r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1079575989]
+position = Vector2(-1.4210855e-14, -16.999998)
+scale = Vector2(0.08531249, 0.08531249)
+texture = ExtResource("1_wxtq5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034317306]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_wxtq5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

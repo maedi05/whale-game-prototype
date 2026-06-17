@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bketn1lg7lyiw"]
 
-[ext_resource type="Texture2D" uid="uid://dmrh8p7bfsx71" path="res://Sprites/attack placeholder.png" id="1_f8cdk"]
+[ext_resource type="Texture2D" uid="uid://dmrh8p7bfsx71" path="res://Sprites/Game elements/Effects/attack placeholder.png" id="1_f8cdk"]
 [ext_resource type="Script" uid="uid://ctwy0qbpqbi1o" path="res://Scripts/projectile.gd" id="1_yr2qt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr2qt"]
@@ -8,6 +8,8 @@ radius = 40.60914
 height = 146.1929
 
 [node name="Projectile" type="Area2D" unique_id=679495636]
+collision_layer = 16
+collision_mask = 13
 script = ExtResource("1_yr2qt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=45353801]

@@ -98,10 +98,12 @@ func _physics_process(delta: float) -> void:
 		#shoot.emit(global_position, facing_right) #when activated gives the level info about position and if facing right is true or not :)
 	if Input.is_action_just_pressed("shoot"):
 		var projectile = PROJECTILE.instantiate()
+		emit_signal("shoot")
 		if "facing_right" in projectile:
 			projectile.facing_right = facing_right
 		if owner:
 			owner.add_child(projectile)
+			
 		else:
 			get_tree().current_scene.add_child(projectile)
 		var spawn_offset = 16.0 if facing_right else -16.0

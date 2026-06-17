@@ -8,4 +8,5 @@ func _on_body_entered(body: Node2D) -> void:
 		var next_level_number = current_scene_file.to_int() + 1 #dont name your folders with numbers otherwise this wont work(
 		
 		var next_level_path = FILE_BEGIN + str(next_level_number) + ".tscn"
-		get_tree().change_scene_to_file(next_level_path)
+		#get_tree().change_scene_to_file(next_level_path)
+		get_tree().call.call_deferred("change_scene_to_file", next_level_path)
