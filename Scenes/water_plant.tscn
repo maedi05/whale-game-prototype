@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://csq3wciie8n3p"]
+
+[ext_resource type="Texture2D" uid="uid://2qacbt0riy25" path="res://Sprites/Game elements/Environment/water plant.png" id="1_chesd"]
+[ext_resource type="Script" uid="uid://cx3sspalujr8b" path="res://Scripts/water_plant.gd" id="1_vum3w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vum3w"]
+radius = 16.0
+height = 184.0
+
+[node name="water_plant" type="Area2D" unique_id=977249037]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_vum3w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=386607495]
+position = Vector2(0, -74.00001)
+scale = Vector2(0.12888417, 0.18008476)
+texture = ExtResource("1_chesd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=81732394]
+position = Vector2(-2, -74)
+shape = SubResource("CapsuleShape2D_vum3w")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

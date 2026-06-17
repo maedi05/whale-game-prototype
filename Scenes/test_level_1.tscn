@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d1h7mli4rvcrg" path="res://icon.svg" id="1_yq4yk"]
 [ext_resource type="PackedScene" uid="uid://b87rky5e23h4p" path="res://Scenes/PlayerScene.tscn" id="2_pu8o7"]
 [ext_resource type="PackedScene" uid="uid://dkp625rebthqi" path="res://Scenes/NextLevel.tscn" id="3_ok5u4"]
+[ext_resource type="PackedScene" uid="uid://csq3wciie8n3p" path="res://Scenes/water_plant.tscn" id="5_8wtdv"]
 [ext_resource type="PackedScene" uid="uid://dmnfwi6rxtkfw" path="res://Scenes/spiky_boy.tscn" id="5_ok5u4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pu8o7"]
@@ -61,5 +62,11 @@ shape = SubResource("RectangleShape2D_yq4yk")
 
 [node name="SpikyGuy" parent="." unique_id=1837700017 instance=ExtResource("5_ok5u4")]
 position = Vector2(-208, 48)
+
+[node name="SpikyGuy2" parent="." unique_id=1089643437 instance=ExtResource("5_ok5u4")]
+position = Vector2(-350, 45)
+
+[node name="water_plant" parent="." unique_id=977249037 instance=ExtResource("5_8wtdv")]
+position = Vector2(-95, 32)
 
 [connection signal="shoot" from="PlayerScene" to="." method="_on_player_scene_shoot"]

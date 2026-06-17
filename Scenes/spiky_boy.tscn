@@ -1,7 +1,14 @@
 [gd_scene format=3 uid="uid://dmnfwi6rxtkfw"]
 
 [ext_resource type="Script" uid="uid://cscw1lu3vhv3s" path="res://Scripts/spiky_boy.gd" id="1_6y01r"]
+[ext_resource type="Shader" uid="uid://bg4rnt63ytf1q" path="res://Shader/blink_shader.gdshader" id="1_d2ujq"]
 [ext_resource type="Texture2D" uid="uid://dltetgoxkl7o7" path="res://Sprites/Game elements/Animals/spiky boy.png" id="1_wxtq5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2ujq"]
+resource_local_to_scene = true
+shader = ExtResource("1_d2ujq")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxtq5"]
 radius = 38.0
@@ -9,10 +16,11 @@ height = 92.0
 
 [node name="SpikyGuy" type="Area2D" unique_id=1837700017]
 collision_layer = 4
-collision_mask = 19
+collision_mask = 17
 script = ExtResource("1_6y01r")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1079575989]
+material = SubResource("ShaderMaterial_d2ujq")
 position = Vector2(-1.4210855e-14, -16.999998)
 scale = Vector2(0.08531249, 0.08531249)
 texture = ExtResource("1_wxtq5")
