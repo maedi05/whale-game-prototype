@@ -2,20 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://2qacbt0riy25" path="res://Sprites/Game elements/Environment/water plant.png" id="1_chesd"]
 [ext_resource type="Script" uid="uid://cx3sspalujr8b" path="res://Scripts/water_plant.gd" id="1_vum3w"]
-[ext_resource type="Shader" uid="uid://n6w11ewgguvs" path="res://Shader/outline_shader.gdshader" id="2_ayx25"]
+[ext_resource type="Shader" uid="uid://rlnnp218pj1f" path="res://Shader/blink_outline_shader.gdshader" id="2_ayx25"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcmdi"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vum3w"]
 shader = ExtResource("2_ayx25")
-shader_parameter/thickness = 11.6750005545625
-shader_parameter/ring_count = 15
-shader_parameter/ring_offset = 0.0
-shader_parameter/outline_color = Color(0.60872877, 0.9625811, 0.9620275, 1)
-shader_parameter/border_clipping_fix = true
-shader_parameter/aspect_ratio = 1.0
-shader_parameter/square_border = false
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/max_or_add = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vum3w"]
 radius = 16.0
@@ -27,7 +17,7 @@ collision_mask = 17
 script = ExtResource("1_vum3w")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=386607495]
-material = SubResource("ShaderMaterial_xcmdi")
+material = SubResource("ShaderMaterial_vum3w")
 position = Vector2(0, -74.00001)
 scale = Vector2(0.12888417, 0.18008476)
 texture = ExtResource("1_chesd")
