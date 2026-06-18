@@ -17,8 +17,8 @@ uniform bool max_or_add = false;
 void vertex(){
 	if (border_clipping_fix){
 		vec2 o = (UV * 2.0 - 1.0);
-		VERTEX += o * thickness - offset;
-		VERTEX.x *= 1.0 + (aspect_ratio-1.0) * (thickness * TEXTURE_PIXEL_SIZE.x) * 2.0;
+		VERTEX += o * thickness - offset * blink_intensity;
+		VERTEX.x *= 1.0 + (aspect_ratio-1.0) * (thickness * TEXTURE_PIXEL_SIZE.x) * 2.0 * blink_intensity;
 	}
 }
 
@@ -43,9 +43,9 @@ void fragment(){
 	vec2 uv = UV;
 	uv -= vec2(0.5);
 	if (border_clipping_fix && blink_intensity > 0.0){
-		uv.x *= 1.0 + (aspect_ratio-1.0) * thickness * TEXTURE_PIXEL_SIZE.x * 2.0;
-		uv *= (1.0 + (thickness * TEXTURE_PIXEL_SIZE * 2.0));
-		uv -= o;
+		uv.x *= 1.0 + (aspect_ratio-1.0) * thickness * TEXTURE_PIXEL_SIZE.x * 2.0 * blink_intensity;
+		uv *= (1.0 + (thickness * TEXTURE_PIXEL_SIZE * 2.0 * blink_intensity));
+		uv -= o * blink_intensity;
 		}
 	uv += vec2(0.5);
 	vec2 size = vec2(thickness) / vec2(textureSize(TEXTURE, 0));
