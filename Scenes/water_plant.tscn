@@ -2,16 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://2qacbt0riy25" path="res://Sprites/Game elements/Environment/water plant.png" id="1_chesd"]
 [ext_resource type="Script" uid="uid://cx3sspalujr8b" path="res://Scripts/water_plant.gd" id="1_vum3w"]
-[ext_resource type="Shader" uid="uid://rlnnp218pj1f" path="res://Shader/blink_outline_shader.gdshader" id="2_ayx25"]
+[ext_resource type="Shader" uid="uid://n6w11ewgguvs" path="res://Shader/outline_shader.gdshader" id="2_ayx25"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vum3w"]
+resource_local_to_scene = true
 shader = ExtResource("2_ayx25")
-shader_parameter/blink_color = Color(8.278489e-06, 0.84232736, 0.631718, 1)
-shader_parameter/blink_intensity = 0.0
-shader_parameter/thickness = 28.2610013423975
+shader_parameter/thickness = 0.0
 shader_parameter/ring_count = 16
 shader_parameter/ring_offset = 0.0
-shader_parameter/outline_color = Color(0.8764527, 0, 0.3647657, 1)
+shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/border_clipping_fix = true
 shader_parameter/aspect_ratio = 1.0
 shader_parameter/square_border = false

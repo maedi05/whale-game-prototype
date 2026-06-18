@@ -25,6 +25,11 @@ position = Vector2(-1.4210855e-14, -16.999998)
 scale = Vector2(0.08531249, 0.08531249)
 texture = ExtResource("1_wxtq5")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="Sprite2D" unique_id=1267029488]
+position = Vector2(1.6657412e-13, 199.26738)
+scale = Vector2(11.721612, 11.721612)
+color = Color(0, 0, 0, 1)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034317306]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_wxtq5")

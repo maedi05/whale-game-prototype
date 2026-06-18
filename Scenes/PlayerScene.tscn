@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dqu7bi3iyrf7c" path="res://Sprites/PlayerAnimations/Run/IMG_2912.png" id="11_s7tkn"]
 [ext_resource type="Texture2D" uid="uid://bomopxqkcsh0p" path="res://Sprites/PlayerAnimations/Run/IMG_2913.png" id="12_nw3qc"]
 [ext_resource type="Texture2D" uid="uid://8d0r7qr0o2jm" path="res://Sprites/PlayerAnimations/Run/IMG_2914.png" id="13_rtvxd"]
+[ext_resource type="Texture2D" uid="uid://cnfv3g1e6camx" path="res://Sprites/Game elements/Effects/2d_lights_and_shadows_neutral_point_light.webp" id="18_oimcg"]
 
 [sub_resource type="Curve" id="Curve_ye8ic"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3502043), 0.0, 0.0, 0, 0]
@@ -126,3 +127,6 @@ scale = Vector2(0.14843747, 0.14843747)
 shape = SubResource("CapsuleShape2D_ye8ic")
 
 [node name="PlayerScene" type="Node2D" parent="." unique_id=1156427373]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=12438054]
+texture = ExtResource("18_oimcg")
