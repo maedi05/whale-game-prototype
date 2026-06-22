@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dc635llgpr3id"]
+
+[ext_resource type="Script" uid="uid://dqtvxx1nf6r8v" path="res://whale.gd" id="1_sweem"]
+[ext_resource type="Curve" uid="uid://ddyq5sdk1d6k4" path="res://Curves/limb_curve.tres" id="2_ectf3"]
+
+[sub_resource type="Curve" id="Curve_sweem"]
+_data = [Vector2(0, 0.57966095), 0.0, 0.0, 0, 0, Vector2(0.38157895, 0.9967533), -1.6777604e-07, -1.6777604e-07, 0, 0, Vector2(1, 0.17433757), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_us4b6"]
+_data = [Vector2(0, 0.36798906), 0.0, 0.0, 0, 0, Vector2(0.5018761, 1), 0.0, 0.0, 0, 0, Vector2(0.9990619, 0.009762883), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="whale" type="Node2D" unique_id=1100481564]
+script = ExtResource("1_sweem")
+
+[node name="body" type="Line2D" parent="." unique_id=410357831]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 50.0
+width_curve = SubResource("Curve_sweem")
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="limb_left" type="Line2D" parent="." unique_id=1254918936]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+width = 20.0
+width_curve = ExtResource("2_ectf3")
+default_color = Color(0, 0, 0, 1)
+
+[node name="limb_right" type="Line2D" parent="." unique_id=1165367975]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+width = 20.0
+width_curve = ExtResource("2_ectf3")
+default_color = Color(0, 0, 0, 1)
+
+[node name="fin" type="Line2D" parent="." unique_id=1114453408]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+width = 20.0
+width_curve = SubResource("Curve_us4b6")
+default_color = Color(0, 0, 0, 1)
