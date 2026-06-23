@@ -103,7 +103,7 @@ func _process(delta: float) -> void:
 	#nvm.. how can i make it according to the point they are placed at and not at [1]? x.x
 	for i in range(1, fin_l_pts.size()):
 		var body_dir = (body_pts[i] - body_pts[i-1]).normalized()
-		var offset_dir = body_dir.rotated(-fin_angle)
+		var offset_dir = body_dir.rotated(fin_angle)
 		fin_l_pts[i] = fin_l_pts[i-1] + offset_dir * fin_radius
 	fin_left.points = fin_l_pts
 	
