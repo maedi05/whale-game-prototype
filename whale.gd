@@ -82,7 +82,17 @@ func _process(delta: float) -> void:
 		
 	#the all-in-one package to move points after eachother. yay. makes it so it applies to every single point in the body and saves me a lot of lines of code
 	for i in range(1, body_pts.size()):
-		body_pts[i] = body_pts[i - 1] + (body_pts[i] - body_pts[i -1]).limit_length(radius)
+		var target_pos = body_pts[i - 1]
+		var reference_dir = (body_pts[i] - body_pts[i - 1]).normalized() if i == 1 else (body_pts[i - 1] - body_pts[i - 2]).normalized()
+
+		var desired_dir = (body_pts[i] - target_pos).normalized()
+		var angle_diff = reference_dir.angle_to(desired_dir)
+		var max_bend = 0.6  # radianes, ~35°. Bájalo para más rigidez
+		
+		angle_diff = clamp(angle_diff, -max_bend, max_bend)
+		var final_dir = reference_dir.rotated(angle_diff)
+		
+		body_pts[i] = target_pos + final_dir * radius
 	body.points = body_pts # Changed identation bc... ye
 	
 	#Constrain left limb with fixed angular offset
