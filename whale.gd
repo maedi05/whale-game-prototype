@@ -95,31 +95,40 @@ func _process(delta: float) -> void:
 			body_pts[i] = target_pos + reference_dir.rotated(angle_diff) * radius
 	body.points = body_pts # Changed identation bc... ye
 	
+	# Front part :3 (instead of initializing it twice)
+	var front_body_dir = (body_pts[1] - body_pts[0]).normalized()
+	
 	#Constrain left limb with fixed angular offset
 	for i in range(1, lb_lf_pts.size()):
-		var body_dir = (body_pts[i] - body_pts[i - 1]).normalized()
-		var offset_dir = body_dir.rotated(-limb_angle) #fixed offset
+		var offset_dir = front_body_dir.rotated(-limb_angle) #fixed offset
 		lb_lf_pts[i] = lb_lf_pts[i - 1] + offset_dir * radius
 	limb_left.points = lb_lf_pts
 	
 	#Constrain right limb with fixed angular offse
 	for i in range(1, lb_rf_pts.size()):
-		var body_dir = (body_pts[i] - body_pts[i - 1]).normalized()
-		var offset_dir = body_dir.rotated(limb_angle) #fixed offset instead of minus limb angle we just put the positive one instead B) so its mirrored. yay im smart
+		var offset_dir = front_body_dir.rotated(limb_angle) #fixed offset instead of minus limb angle we just put the positive one instead B) so its mirrored. yay im smart
 		lb_rf_pts[i] = lb_rf_pts[i - 1] + offset_dir * radius
 	limb_right.points = lb_rf_pts
 	
+	# Using same logic, we get the back of the body
+	var back_body_dir = (body_pts[fin_pos] - body_pts[fin_pos -1]).normalized()
+	# You were using i and i-1, that is the current position, so that's the reason
+	# it was "following" the movement of the front part. Now it's following the last
+	# positioning available aka. The back
+	
 	#constraining the two fins now. lets hope this works ><
 	#nvm.. how can i make it according to the point they are placed at and not at [1]? x.x
+	# Tried to avoid this, but i can't turn the fins to make it a T
+	var dir_left_T = back_body_dir.rotated(-PI/2) # = -90°
+	var dir_right_T = back_body_dir.rotated(PI/2) # = 90°
+	
 	for i in range(1, fin_l_pts.size()):
-		var body_dir = (body_pts[i] - body_pts[i-1]).normalized()
-		var offset_dir = body_dir.rotated(fin_angle)
+		var offset_dir = dir_left_T.rotated(fin_angle)
 		fin_l_pts[i] = fin_l_pts[i-1] + offset_dir * fin_radius
 	fin_left.points = fin_l_pts
 	
 	for i in range(1, fin_r_pts.size()):
-		var body_dir = (body_pts[i] - body_pts[i-1]).normalized()
-		var offset_dir = body_dir.rotated(-fin_angle)
+		var offset_dir = dir_right_T.rotated(-fin_angle)
 		fin_r_pts[i] = fin_r_pts[i-1] + offset_dir * fin_radius
 	fin_right.points = fin_r_pts
 	
