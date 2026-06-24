@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 	fin_l_pts[0] = fin_l_pts[0].move_toward(body_pts[fin_pos],200 * delta)
 	fin_r_pts[0] = fin_r_pts[0].move_toward(body_pts[fin_pos],200 * delta)
 	
-	#moving the anchor head point (again? o.o me confused)
+	#moving the anchor head point (again? o.o me confused) // Just moving it twice as fast ig
 	if move != Vector2.ZERO and body_pts.size() > 0:
 		body_pts[0] += move * velocity * delta
 		
@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 	#the all-in-one package to move points after eachother. yay. makes it so it applies to every single point in the body and saves me a lot of lines of code
 	for i in range(1, body_pts.size()):
 		body_pts[i] = body_pts[i - 1] + (body_pts[i] - body_pts[i -1]).limit_length(radius)
-		body.points = body_pts
+	body.points = body_pts # Changed identation bc... ye
 	
 	#Constrain left limb with fixed angular offset
 	for i in range(1, lb_lf_pts.size()):
