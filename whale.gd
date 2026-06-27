@@ -11,8 +11,8 @@ extends Node2D
 @export var radius :int = 20
 @export var fin_radius :int = 20
 @export var fin_pos :int = 9          # Which body point the tail attaches to
-@export var limb_angle :float = 0.8   # Pectoral fin spread
-@export var fin_angle :float = 0.8    # Tail fluke spread
+@export var limb_angle :float = 0.8   # Pectoral fin spread (i dont even know what pectoral means lmao)
+@export var fin_angle :float = 0.8    # Tail fluke spread (i think it meant the tail fins lol)
 @export var velocity :int = 250
 
 # NEW: turning smoothness
@@ -44,7 +44,6 @@ func _ready() -> void:
 	fin_right.points[0] = body.points[fin_pos]
 
 func _process(delta: float) -> void:
-	# Shortcuts
 	var body_pts = body.points
 	var lb_lf_pts = limb_left.points
 	var lb_rf_pts = limb_right.points
@@ -73,11 +72,11 @@ func _process(delta: float) -> void:
 	else:
 		is_moving = false
 	
-	# --- 2. BODY CHAIN CONSTRAINT (Restored to your original) ---
+	# --- 2. BODY CHAIN CONSTRAINT
 	# Each segment follows the previous one with a fixed distance (radius)
 	for i in range(1, body_pts.size()):
 		body_pts[i] = body_pts[i - 1] + (body_pts[i] - body_pts[i - 1]).limit_length(radius)
-	body.points = body_pts  # Apply to the Line2D
+	body.points = body_pts 
 	
 	# --- 3. PECTORAL LIMBS (Left & Right - unchanged) ---
 	lb_lf_pts[0] = body_pts[1]
@@ -105,14 +104,14 @@ func _process(delta: float) -> void:
 	var tail_base = body_pts[fin_pos]
 	var tail_dir = (body_pts[fin_pos] - body_pts[fin_pos - 1]).normalized()
 	
-	# Left Lobe
+	# left fin placement
 	fin_l_pts[0] = tail_base
 	var left_lobe_dir = tail_dir.rotated(-PI/2 + fin_angle)
 	for i in range(1, fin_l_pts.size()):
 		fin_l_pts[i] = fin_l_pts[i-1] + left_lobe_dir * fin_radius
 	fin_left.points = fin_l_pts
 	
-	# Right Lobe
+	# right fin placement
 	fin_r_pts[0] = tail_base
 	var right_lobe_dir = tail_dir.rotated(PI/2 - fin_angle)
 	for i in range(1, fin_r_pts.size()):
