@@ -3,30 +3,32 @@ extends Node2D
 @onready var body: Line2D = $body
 @onready var limb_left: Line2D = $limb_left
 @onready var limb_right: Line2D = $limb_right
-@onready var fin: Line2D = $fin #tail of the fish, duh
+@onready var fin: Line2D = $fin
 @onready var fin_left: Line2D = $fin_left
 @onready var fin_right: Line2D = $fin_right
 
+# --- CONFIG ---
 @export var radius :int = 20
 @export var fin_radius :int = 20
-@export var fin_pos :int = 8 # just the point of the array of the body where the fin gets placed
-@export var limb_angle :float = 0.8
-@export var fin_angle :float = 0.8
+@export var fin_pos :int = 9          # Which body point the tail attaches to
+@export var limb_angle :float = 0.8   # Pectoral fin spread
+@export var fin_angle :float = 0.8    # Tail fluke spread
 @export var velocity :int = 250
+
+# NEW: turning smoothness
+@export var max_turn_speed : float = 3.0   # radians per second
+
 var is_moving = false
+var head_dir : Vector2 = Vector2.RIGHT     # current heading direction
 
 func _ready() -> void:
-	for i in range(0,body.points.size()):
-		body.points[i] = Vector2(i*2, 200.0) # sets the body point amount ig? he didn't explain it well but as long as it works lol
-		
-		#creating points for the limbs
-	for i in range(1,limb_left.points.size()):
+	# Initialize straight shapes
+	for i in range(0, body.points.size()):
+		body.points[i] = Vector2(i*2, 200.0)
+	for i in range(1, limb_left.points.size()):
 		limb_left.points[i] = Vector2(i*2, -200.0)
-		
 	for i in range(1, limb_right.points.size()):
 		limb_right.points[i] = Vector2(i*2, 400.0)
-	
-	#creating points for the fin (tail)
 	for i in range(1, fin.points.size()):
 		fin.points[i] = Vector2(i*2, 400.0)
 	for i in range(1, fin_left.points.size()):
@@ -34,103 +36,85 @@ func _ready() -> void:
 	for i in range(1, fin_right.points.size()):
 		fin_right.points[i] = Vector2(i*2, 400.0)
 	
-	
-	#attaching limbs and fin to the body
+	# Attach bases
 	limb_left.points[0] = body.points[1]
 	limb_right.points[0] = body.points[1]
 	fin.points[0] = body.points[fin_pos]
 	fin_left.points[0] = body.points[fin_pos]
 	fin_right.points[0] = body.points[fin_pos]
-	
-#drawing points for procedural animation :)
+
 func _process(delta: float) -> void:
-	var body_pts = body.points #shortening body.points to just body_pts. nice. i am sure that won't confuse me in the future xD
+	# Shortcuts
+	var body_pts = body.points
 	var lb_lf_pts = limb_left.points
-	var lb_rf_pts = limb_right.points #rf for "right"? alright tutorial guy xD
+	var lb_rf_pts = limb_right.points
 	var fin_pts = fin.points
 	var fin_l_pts = fin_left.points
 	var fin_r_pts = fin_right.points
 	
-	#basic movement... this needs some proper changes with tweens or smth for smoother start and stop
-	var move = Vector2(
+	# --- 1. INPUT & HEAD MOVEMENT (with smooth turning) ---
+	var move_input = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
-	) 
+	)
 	
-	if move != Vector2.ZERO:
+	if move_input != Vector2.ZERO:
 		is_moving = true
-		body_pts[0] += move * velocity * delta #400 is velocity/ speed in our case
+		var target_dir = move_input.normalized()
+		# Compute the angle between current heading and desired direction
+		var angle_diff = head_dir.angle_to(target_dir)
+		# Clamp the rotation to max_turn_speed per second
+		var max_angle = max_turn_speed * delta
+		if abs(angle_diff) > max_angle:
+			angle_diff = sign(angle_diff) * max_angle
+		head_dir = head_dir.rotated(angle_diff)
+		# Move the head in the smoothed direction
+		body_pts[0] += head_dir * velocity * delta
 	else:
-		is_moving = false # i made this myself for future use so i can have a afk animation,omg i can code now TvT (xD barely but still)
-		#updating the limb points to move with the main body
-	lb_lf_pts[0] = lb_lf_pts[0].move_toward(body_pts[1],200 * delta)
-	lb_rf_pts[0] = lb_rf_pts[0].move_toward(body_pts[1],200 * delta)
-	fin_pts[0] = fin_pts[0].move_toward(body_pts[fin_pos],200 * delta) # in that case fin_pos is just 8, meaning it is placed at the 8th point of the body points chain. idk why the tutorial guy made that a variable but decided not to do the same for the limbs aka fins but okay x.x
-	fin_l_pts[0] = fin_l_pts[0].move_toward(body_pts[fin_pos],200 * delta)
-	fin_r_pts[0] = fin_r_pts[0].move_toward(body_pts[fin_pos],200 * delta)
+		is_moving = false
 	
-	#moving the anchor head point (again? o.o me confused)
-	if move != Vector2.ZERO and body_pts.size() > 0:
-		body_pts[0] += move * velocity * delta
-		
-	#attaching the limbs to the body
-		lb_lf_pts[0] = body_pts[1]
-		lb_rf_pts[0] = body_pts[1]
-		fin_pts[0] = body_pts[fin_pos]
-		fin_l_pts[0] = body_pts[fin_pos]
-		fin_r_pts[0] = body_pts[fin_pos]
-		
-	#the all-in-one package to move points after eachother. yay. makes it so it applies to every single point in the body and saves me a lot of lines of code
+	# --- 2. BODY CHAIN CONSTRAINT (Restored to your original) ---
+	# Each segment follows the previous one with a fixed distance (radius)
 	for i in range(1, body_pts.size()):
-		body_pts[i] = body_pts[i - 1] + (body_pts[i] - body_pts[i -1]).limit_length(radius)
-		body.points = body_pts
+		body_pts[i] = body_pts[i - 1] + (body_pts[i] - body_pts[i - 1]).limit_length(radius)
+	body.points = body_pts  # Apply to the Line2D
 	
-	#Constrain left limb with fixed angular offset
+	# --- 3. PECTORAL LIMBS (Left & Right - unchanged) ---
+	lb_lf_pts[0] = body_pts[1]
+	lb_rf_pts[0] = body_pts[1]
+	
 	for i in range(1, lb_lf_pts.size()):
 		var body_dir = (body_pts[i] - body_pts[i - 1]).normalized()
-		var offset_dir = body_dir.rotated(-limb_angle) #fixed offset
+		var offset_dir = body_dir.rotated(-limb_angle)
 		lb_lf_pts[i] = lb_lf_pts[i - 1] + offset_dir * radius
 	limb_left.points = lb_lf_pts
 	
-	#Constrain right limb with fixed angular offse
 	for i in range(1, lb_rf_pts.size()):
 		var body_dir = (body_pts[i] - body_pts[i - 1]).normalized()
-		var offset_dir = body_dir.rotated(limb_angle) #fixed offset instead of minus limb angle we just put the positive one instead B) so its mirrored. yay im smart
+		var offset_dir = body_dir.rotated(limb_angle)
 		lb_rf_pts[i] = lb_rf_pts[i - 1] + offset_dir * radius
 	limb_right.points = lb_rf_pts
 	
-	#constraining the two fins now. lets hope this works ><
-	#nvm.. how can i make it according to the point they are placed at and not at [1]? x.x
-	for i in range(1, fin_l_pts.size()):
-		var body_dir = (body_pts[i] - body_pts[i-1]).normalized()
-		var offset_dir = body_dir.rotated(fin_angle)
-		fin_l_pts[i] = fin_l_pts[i-1] + offset_dir * fin_radius
-	fin_left.points = fin_l_pts
-	
-	for i in range(1, fin_r_pts.size()):
-		var body_dir = (body_pts[i] - body_pts[i-1]).normalized()
-		var offset_dir = body_dir.rotated(-fin_angle)
-		fin_r_pts[i] = fin_r_pts[i-1] + offset_dir * fin_radius
-	fin_right.points = fin_r_pts
-	
-	
-	#constrain the fin to the right end of the array
+	# --- 4. TAIL BASE (Middle spike - unchanged) ---
+	fin_pts[0] = body_pts[fin_pos]
 	for i in range(1, fin_pts.size()):
 		fin_pts[i] = fin_pts[i - 1] + (fin_pts[i] - fin_pts[i - 1]).limit_length(radius)
-		fin.points = fin_pts
-
-	queue_redraw()
-
-
-#mf said nuh uh. we don't need that anymore T.T what is this tutorial. dont make me do all of dat if i wont use it anyway, aaa
-
-#var anchor :Vector2 = Vector2(200.0,200.0) 
-#var point :Vector2 = Vector2(200.0,400.0)
-
-#pts[1] = pts[0] + (pts[1] - pts[0]).limit_length(100) # pts 0 in this case is the first point......bro literially said we don't need this anymore just to prove a point lmao, okay?
-
-#func _draw() -> void:
-	#draw_circle (anchor, 10, "white")
-	#draw_line(anchor,point,"red",5) # we draw a line starting from point "anchor" to point "point" which has the color red and a set width
-	#draw_circle (point, 10, "green")
+	fin.points = fin_pts
 	
+	# --- 5. TAIL FLUKES (FIXED - now correctly follows the TAIL) ---
+	var tail_base = body_pts[fin_pos]
+	var tail_dir = (body_pts[fin_pos] - body_pts[fin_pos - 1]).normalized()
+	
+	# Left Lobe
+	fin_l_pts[0] = tail_base
+	var left_lobe_dir = tail_dir.rotated(-PI/2 + fin_angle)
+	for i in range(1, fin_l_pts.size()):
+		fin_l_pts[i] = fin_l_pts[i-1] + left_lobe_dir * fin_radius
+	fin_left.points = fin_l_pts
+	
+	# Right Lobe
+	fin_r_pts[0] = tail_base
+	var right_lobe_dir = tail_dir.rotated(PI/2 - fin_angle)
+	for i in range(1, fin_r_pts.size()):
+		fin_r_pts[i] = fin_r_pts[i-1] + right_lobe_dir * fin_radius
+	fin_right.points = fin_r_pts

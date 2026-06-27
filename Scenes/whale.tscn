@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqtvxx1nf6r8v" path="res://whale.gd" id="1_jns7k"]
 [ext_resource type="Curve" uid="uid://ddyq5sdk1d6k4" path="res://Curves/limb_curve.tres" id="2_ltmiw"]
+[ext_resource type="Curve" uid="uid://crtx2colf6evy" path="res://Curves/fin_curve.tres" id="3_ltmiw"]
 
 [sub_resource type="Curve" id="Curve_sweem"]
 _data = [Vector2(0, 0.57966095), 0.0, 0.0, 0, 0, Vector2(0.38157895, 0.9967533), -1.6777604e-07, -1.6777604e-07, 0, 0, Vector2(1, 0.17433757), 0.0, 0.0, 0, 0]
@@ -14,6 +15,8 @@ point_count = 3
 [node name="whale" type="Node2D" unique_id=1100481564]
 script = ExtResource("1_jns7k")
 fin_angle = 0.3
+velocity = 400
+max_turn_speed = 3.5
 
 [node name="body" type="Line2D" parent="." unique_id=410357831]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -37,6 +40,7 @@ width_curve = ExtResource("2_ltmiw")
 default_color = Color(0, 0, 0, 1)
 
 [node name="fin" type="Line2D" parent="." unique_id=1114453408]
+visible = false
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
 width = 20.0
 width_curve = SubResource("Curve_us4b6")
@@ -44,6 +48,12 @@ default_color = Color(0, 0, 0, 1)
 
 [node name="fin_left" type="Line2D" parent="." unique_id=744981923]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+width = 15.0
+width_curve = ExtResource("3_ltmiw")
+default_color = Color(0, 0, 0, 1)
 
 [node name="fin_right" type="Line2D" parent="." unique_id=1497950488]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
+width = 15.0
+width_curve = ExtResource("3_ltmiw")
+default_color = Color(0, 0, 0, 1)
