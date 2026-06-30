@@ -26,6 +26,7 @@ scale = Vector2(0.08531249, 0.08531249)
 texture = ExtResource("1_wxtq5")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Sprite2D" unique_id=1267029488]
+visible = false
 position = Vector2(1.6657412e-13, 199.26738)
 scale = Vector2(11.721612, 11.721612)
 color = Color(0, 0, 0, 1)
