@@ -75,6 +75,3 @@ position = Vector2(-398, -390)
 
 [node name="Collectible2" parent="." unique_id=1769941520 instance=ExtResource("6_xrrax")]
 position = Vector2(-149, -510)
-
-[node name="Collectible3" parent="." unique_id=470387669 instance=ExtResource("6_xrrax")]
-position = Vector2(-410, -147)
