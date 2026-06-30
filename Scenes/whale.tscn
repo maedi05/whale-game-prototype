@@ -21,11 +21,14 @@ fin_angle = 0.3
 max_turn_speed = 3.5
 friction = 0.19
 max_speed = 270.0
+enable_circle_attack = false
 circle_max_radius = 500.0
 circle_grow_duration = 0.6
 circle_cooldown = 0.6
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1907413709]
+collision_layer = 2
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1528619751]
 shape = SubResource("CircleShape2D_d14bn")
@@ -76,3 +79,6 @@ default_color = Color(0, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=942010642]
 position_smoothing_enabled = true
+
+[node name="bullet_mouth" type="Node2D" parent="." unique_id=1611926826]
+position = Vector2(0, -164)

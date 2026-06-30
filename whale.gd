@@ -20,6 +20,10 @@ extends Node2D
 @export_range(0.0, 1.0, 0.01) var friction: float = 0.92
 @export_range(0.0, 500.0, 10.0) var max_speed: float = 250.0
 
+# ---- Feature toggles ----
+@export var enable_bullets: bool = true
+@export var enable_circle_attack: bool = true
+
 # ---- Circle attack ----
 @export var circle_color: Color = Color.WHITE
 @export var circle_max_radius: float = 200.0
@@ -30,6 +34,9 @@ extends Node2D
 
 var velocity: Vector2 = Vector2.ZERO
 var heading: Vector2 = Vector2.UP
+
+# Bullet stuff
+var bullet_path = preload("res://Scenes/bullet.tscn")
 
 # Circle state
 var circle_active: bool = false
@@ -51,7 +58,7 @@ func _process(delta: float):
 	
 	if circle_active:
 		queue_redraw()
-
+		
 func _draw():
 	if not circle_active:
 		return
@@ -60,32 +67,33 @@ func _draw():
 	draw_circle(attach_pos, circle_radius, color)
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("shoot") and can_trigger_circle:
+	# Circle attack – only if enabled and the circle can trigger
+	if event.is_action_pressed("shoot") and enable_circle_attack and can_trigger_circle:
 		_start_circle_attack()
+	
+	# Bullet firing – only if enabled
+	if event.is_action_pressed("shoot") and enable_bullets:
+		fire()
 
 # ----- Initialisation helpers -----
 func _initialize_geometry():
-	# Body: upright, head at (0,0), points spaced by radius
 	var pts = body.points
 	for i in pts.size():
 		pts[i] = Vector2(0, i * radius)
 	body.points = pts
 	
-	# Set up all other chains using the helper
 	_init_chain(limb_left, -10.0)
 	_init_chain(limb_right, 10.0)
 	_init_chain(fin, 0.0, fin_pos)
 	_init_chain(fin_left, -10.0, fin_pos)
 	_init_chain(fin_right, 10.0, fin_pos)
 	
-	# Attach roots to corresponding body points
 	limb_left.points[0] = body.points[1]
 	limb_right.points[0] = body.points[1]
 	fin.points[0] = body.points[fin_pos]
 	fin_left.points[0] = body.points[fin_pos]
 	fin_right.points[0] = body.points[fin_pos]
 
-# Helper to set a straight chain along the body axis
 func _init_chain(line: Line2D, x_offset: float, start_index: int = 0):
 	var p = line.points
 	for i in p.size():
@@ -127,53 +135,42 @@ func _update_movement(delta: float):
 	
 	global_position += velocity * delta
 
-# ----- Body chain (head‑to‑tail) -----
+# ----- Body chain -----
 func _update_body(delta: float):
 	var pts = body.points.duplicate()
-	
-	# Move the head (index 0) according to velocity (creates tail‑drag)
 	pts[0] += velocity * delta
-	
-	# Constrain each segment to length = radius
 	for i in range(1, pts.size()):
 		var dir = pts[i] - pts[i - 1]
 		if dir.length() > radius:
 			pts[i] = pts[i - 1] + dir.normalized() * radius
-	
-	# Shift so head stays at local (0,0)
 	var offset = pts[0]
 	for i in pts.size():
 		pts[i] -= offset
-	
 	body.points = pts
 
-# ----- Limbs (pectoral fins) -----
+# ----- Limbs -----
 func _update_limbs():
 	var body_pts = body.points
-	var root_idx = 1  # attached to body point 1
-	
+	var root_idx = 1
 	_update_pectoral(limb_left, body_pts, root_idx, -limb_angle)
 	_update_pectoral(limb_right, body_pts, root_idx, limb_angle)
 
 func _update_pectoral(line: Line2D, body_pts: PackedVector2Array, root_idx: int, angle_offset: float):
 	var pts = line.points.duplicate()
 	pts[0] = body_pts[root_idx]
-	
 	for i in range(1, pts.size()):
 		var body_dir = (body_pts[i] - body_pts[i - 1]).normalized()
 		var dir = body_dir.rotated(angle_offset)
 		pts[i] = pts[i - 1] + dir * radius
-	
 	line.points = pts
 
-# ----- Tail (base fin + flukes) -----
+# ----- Tail -----
 func _update_tail():
 	var body_pts = body.points
 	var base_idx = fin_pos
 	var tail_base = body_pts[base_idx]
 	var tail_dir = (body_pts[base_idx] - body_pts[base_idx - 1]).normalized()
 	
-	# Tail base (fin) – same as body chain, attached at fin_pos
 	var fin_pts = fin.points.duplicate()
 	fin_pts[0] = tail_base
 	for i in range(1, fin_pts.size()):
@@ -182,7 +179,6 @@ func _update_tail():
 			fin_pts[i] = fin_pts[i - 1] + dir.normalized() * radius
 	fin.points = fin_pts
 	
-	# Left fluke
 	var l_pts = fin_left.points.duplicate()
 	l_pts[0] = tail_base
 	var l_dir = tail_dir.rotated(-PI / 2 + fin_angle)
@@ -190,7 +186,6 @@ func _update_tail():
 		l_pts[i] = l_pts[i - 1] + l_dir * fin_radius
 	fin_left.points = l_pts
 	
-	# Right fluke
 	var r_pts = fin_right.points.duplicate()
 	r_pts[0] = tail_base
 	var r_dir = tail_dir.rotated(PI / 2 - fin_angle)
@@ -198,8 +193,23 @@ func _update_tail():
 		r_pts[i] = r_pts[i - 1] + r_dir * fin_radius
 	fin_right.points = r_pts
 
+# ----- Bullet firing -----
+func fire():
+	if not enable_bullets:  # extra safety
+		return
+	var bullet = bullet_path.instantiate()
+	var mouse_pos = get_global_mouse_position()
+	var angle_to_mouse = (mouse_pos - global_position).angle()
+	
+	bullet.dir = angle_to_mouse
+	bullet.pos = $Node2D.global_position
+	bullet.rota = angle_to_mouse
+	get_parent().add_child(bullet)
+
 # ----- Circle attack -----
 func _start_circle_attack():
+	if not enable_circle_attack:  # extra safety
+		return
 	can_trigger_circle = false
 	circle_active = true
 	circle_radius = 0.0
