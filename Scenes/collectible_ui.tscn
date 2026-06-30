@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cn4lrw7jer4gp"]
+
+[ext_resource type="Texture2D" uid="uid://p8m1rso31yy0" path="res://Sprites/Game elements/shell coin.png" id="1_8upam"]
+[ext_resource type="Script" uid="uid://uttc6rexela1" path="res://Scripts/collectible_ui.gd" id="1_43xmf"]
+
+[sub_resource type="SystemFont" id="SystemFont_8upam"]
+subpixel_positioning = 0
+
+[node name="CollectibleUI" type="Control" unique_id=874179142]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 70.0
+script = ExtResource("1_43xmf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1059312190]
+layout_mode = 0
+offset_top = -5.0
+offset_right = 40.0
+offset_bottom = 35.0
+texture = ExtResource("1_8upam")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1831151759]
+layout_mode = 0
+offset_left = 45.0
+offset_top = -5.0
+offset_right = 62.0
+offset_bottom = 37.0
+theme_override_fonts/font = SubResource("SystemFont_8upam")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1

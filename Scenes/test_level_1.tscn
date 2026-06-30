@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://csq3wciie8n3p" path="res://Scenes/water_plant.tscn" id="5_8wtdv"]
 [ext_resource type="PackedScene" uid="uid://dmnfwi6rxtkfw" path="res://Scenes/spiky_boy.tscn" id="5_ok5u4"]
 [ext_resource type="PackedScene" uid="uid://dc635llgpr3id" path="res://Scenes/whale.tscn" id="6_8wtdv"]
+[ext_resource type="PackedScene" uid="uid://bc2ocegk0w7ta" path="res://Scenes/collectable.tscn" id="6_xrrax"]
+[ext_resource type="PackedScene" uid="uid://cn4lrw7jer4gp" path="res://Scenes/collectible_ui.tscn" id="7_xrrax"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pu8o7"]
 
@@ -68,3 +70,16 @@ position = Vector2(-350, 45)
 position = Vector2(-95, 32)
 
 [node name="whale" parent="." unique_id=1100481564 instance=ExtResource("6_8wtdv")]
+
+[node name="collectable" parent="." unique_id=1490040460 instance=ExtResource("6_xrrax")]
+position = Vector2(-243, -208)
+
+[node name="collectable2" parent="." unique_id=2029190144 instance=ExtResource("6_xrrax")]
+position = Vector2(-598, -586)
+
+[node name="collectable3" parent="." unique_id=393437655 instance=ExtResource("6_xrrax")]
+position = Vector2(99, -651)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1469361273]
+
+[node name="CollectibleUI" parent="CanvasLayer" unique_id=874179142 instance=ExtResource("7_xrrax")]

@@ -3,9 +3,7 @@
 [ext_resource type="Script" uid="uid://dqtvxx1nf6r8v" path="res://whale.gd" id="1_jns7k"]
 [ext_resource type="Curve" uid="uid://ddyq5sdk1d6k4" path="res://Curves/limb_curve.tres" id="2_ltmiw"]
 [ext_resource type="Curve" uid="uid://crtx2colf6evy" path="res://Curves/fin_curve.tres" id="3_ltmiw"]
-[ext_resource type="Script" uid="uid://cuisxflxi1fpu" path="res://Scenes/echo_circle.gd" id="4_umla4"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d14bn"]
+[ext_resource type="Script" uid="uid://cuisxflxi1fpu" path="res://Scripts/echo_circle.gd" id="4_umla4"]
 
 [sub_resource type="Curve" id="Curve_sweem"]
 _data = [Vector2(0, 0.57966095), 0.0, 0.0, 0, 0, Vector2(0.38157895, 0.9967533), -1.6777604e-07, -1.6777604e-07, 0, 0, Vector2(1, 0.17433757), 0.0, 0.0, 0, 0]
@@ -15,7 +13,14 @@ point_count = 3
 _data = [Vector2(0, 0.36798906), 0.0, 0.0, 0, 0, Vector2(0.5018761, 1), 0.0, 0.0, 0, 0, Vector2(0.9990619, 0.009762883), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="whale" type="Node2D" unique_id=1100481564]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4ybl7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d14bn"]
+radius = 24.186773
+
+[node name="Player" type="CharacterBody2D" unique_id=2052032726 groups=["Player"]]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_jns7k")
 fin_angle = 0.3
 max_turn_speed = 3.5
@@ -25,13 +30,7 @@ enable_circle_attack = false
 circle_max_radius = 500.0
 circle_grow_duration = 0.6
 circle_cooldown = 0.6
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1907413709]
-collision_layer = 2
-collision_mask = 13
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1528619751]
-shape = SubResource("CircleShape2D_d14bn")
+metadata/_custom_type_script = "uid://ct1bbwqhdd7c8"
 
 [node name="Node2D" type="Node2D" parent="." unique_id=2116625150]
 visible = false
@@ -78,7 +77,16 @@ width_curve = ExtResource("3_ltmiw")
 default_color = Color(0, 0, 0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=942010642]
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
 [node name="bullet_mouth" type="Node2D" parent="." unique_id=1611926826]
 position = Vector2(0, -164)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1122029630]
+position = Vector2(-5.364418e-07, 0)
+scale = Vector2(48, 48)
+texture = SubResource("PlaceholderTexture2D_4ybl7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1528619751]
+shape = SubResource("CircleShape2D_d14bn")

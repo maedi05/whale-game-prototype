@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dsbksiqul2uag"]
 
 [ext_resource type="Script" uid="uid://b3q24or7b3q2i" path="res://Scripts/GameController.gd" id="1_0f027"]
+[ext_resource type="PackedScene" uid="uid://cn4lrw7jer4gp" path="res://Scenes/collectible_ui.tscn" id="2_6l7je"]
 
 [node name="GameController" type="Node" unique_id=1034732389]
 script = ExtResource("1_0f027")
@@ -12,3 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI" unique_id=1999716987]
+
+[node name="CollectibleUI" parent="GUI/CanvasLayer" unique_id=874179142 instance=ExtResource("2_6l7je")]
