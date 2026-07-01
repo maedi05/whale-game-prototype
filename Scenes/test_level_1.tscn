@@ -19,6 +19,7 @@ size = Vector2(20, 252)
 [node name="Scene1" type="Node2D" unique_id=1432909756]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=366828304]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=399642497]
 position = Vector2(45, 51.5)
@@ -31,6 +32,7 @@ scale = Vector2(1, 0.3984375)
 shape = SubResource("WorldBoundaryShape2D_pu8o7")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1285923561]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=452522309]
 position = Vector2(172, 25.000004)
@@ -43,9 +45,10 @@ scale = Vector2(1, 0.3984375)
 shape = SubResource("RectangleShape2D_f7g2b")
 
 [node name="NextLevel" parent="." unique_id=1202534979 instance=ExtResource("3_ok5u4")]
-position = Vector2(276, -262)
+position = Vector2(-188, -1705)
 
 [node name="wall" type="StaticBody2D" parent="." unique_id=456362809]
+visible = false
 position = Vector2(245, 13)
 
 [node name="Sprite2D" type="Sprite2D" parent="wall" unique_id=1327438315]
@@ -61,24 +64,39 @@ shape = SubResource("RectangleShape2D_yq4yk")
 [node name="Projectiles" type="Node2D" parent="." unique_id=1567613278]
 
 [node name="SpikyGuy" parent="." unique_id=1837700017 instance=ExtResource("5_ok5u4")]
-position = Vector2(-208, 48)
+position = Vector2(-21, -490)
 
 [node name="SpikyGuy2" parent="." unique_id=1089643437 instance=ExtResource("5_ok5u4")]
-position = Vector2(-350, 45)
+position = Vector2(-530, -74)
 
 [node name="water_plant" parent="." unique_id=977249037 instance=ExtResource("5_8wtdv")]
 position = Vector2(-95, 32)
 
+[node name="water_plant2" parent="." unique_id=1024790939 instance=ExtResource("5_8wtdv")]
+position = Vector2(-444, -637)
+
+[node name="water_plant3" parent="." unique_id=242547148 instance=ExtResource("5_8wtdv")]
+position = Vector2(-899, -309)
+
+[node name="water_plant4" parent="." unique_id=1289443353 instance=ExtResource("5_8wtdv")]
+position = Vector2(305, -721)
+
+[node name="water_plant5" parent="." unique_id=1937743995 instance=ExtResource("5_8wtdv")]
+position = Vector2(747, -65)
+
+[node name="water_plant6" parent="." unique_id=1791547580 instance=ExtResource("5_8wtdv")]
+position = Vector2(123, -1312)
+
 [node name="whale" parent="." unique_id=1100481564 instance=ExtResource("6_8wtdv")]
 
 [node name="collectable" parent="." unique_id=1490040460 instance=ExtResource("6_xrrax")]
-position = Vector2(-243, -208)
+position = Vector2(4, -211)
 
 [node name="collectable2" parent="." unique_id=2029190144 instance=ExtResource("6_xrrax")]
-position = Vector2(-598, -586)
+position = Vector2(-795, -1481)
 
 [node name="collectable3" parent="." unique_id=393437655 instance=ExtResource("6_xrrax")]
-position = Vector2(99, -651)
+position = Vector2(85, -1091)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1469361273]
 

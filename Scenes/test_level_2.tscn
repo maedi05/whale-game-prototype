@@ -1,21 +1,66 @@
 [gd_scene format=3 uid="uid://bfomco7lrc2bb"]
 
 [ext_resource type="PackedScene" uid="uid://sn1uto0xov4" path="res://Scenes/floor_placeholder.tscn" id="1_qpu34"]
-[ext_resource type="PackedScene" uid="uid://b87rky5e23h4p" path="res://Scenes/PlayerScene.tscn" id="2_kn8tv"]
+[ext_resource type="PackedScene" uid="uid://dbv08gjdodb4p" path="res://Scenes/congrats_screen.tscn" id="3_dtwrq"]
 [ext_resource type="PackedScene" uid="uid://dkp625rebthqi" path="res://Scenes/NextLevel.tscn" id="3_kn8tv"]
+[ext_resource type="PackedScene" uid="uid://dc635llgpr3id" path="res://Scenes/whale.tscn" id="4_dtwrq"]
+[ext_resource type="PackedScene" uid="uid://csq3wciie8n3p" path="res://Scenes/water_plant.tscn" id="5_uduus"]
 
 [node name="Scene2" type="Node2D" unique_id=1655639109]
 
 [node name="StaticBody2D" parent="." unique_id=1316632515 instance=ExtResource("1_qpu34")]
-
-[node name="Character" parent="." unique_id=2041452050 instance=ExtResource("2_kn8tv")]
-position = Vector2(0, -29)
+visible = false
 
 [node name="StaticBody2D2" parent="." unique_id=1726398281 instance=ExtResource("1_qpu34")]
+visible = false
 position = Vector2(661, -1)
 
 [node name="StaticBody2D3" parent="." unique_id=1447552847 instance=ExtResource("1_qpu34")]
+visible = false
 position = Vector2(1312, -79)
 
 [node name="NextLevel" parent="." unique_id=1202534979 instance=ExtResource("3_kn8tv")]
+visible = false
 position = Vector2(1811, -108)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2073458971]
+
+[node name="Control" parent="CanvasLayer" unique_id=1900062095 instance=ExtResource("3_dtwrq")]
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=54819433]
+
+[node name="water_plant" parent="." unique_id=977249037 instance=ExtResource("5_uduus")]
+position = Vector2(-213, 47)
+
+[node name="water_plant2" parent="." unique_id=1746868943 instance=ExtResource("5_uduus")]
+visible = false
+position = Vector2(244, -95)
+
+[node name="water_plant3" parent="." unique_id=438409383 instance=ExtResource("5_uduus")]
+position = Vector2(-44, -300)
+
+[node name="water_plant4" parent="." unique_id=502672502 instance=ExtResource("5_uduus")]
+position = Vector2(-563, -414)
+
+[node name="water_plant5" parent="." unique_id=1917525251 instance=ExtResource("5_uduus")]
+position = Vector2(-312, 450)
+
+[node name="water_plant6" parent="." unique_id=973118017 instance=ExtResource("5_uduus")]
+position = Vector2(436, 570)
+
+[node name="water_plant7" parent="." unique_id=1594756084 instance=ExtResource("5_uduus")]
+position = Vector2(640, -286)
+
+[node name="water_plant8" parent="." unique_id=2031968081 instance=ExtResource("5_uduus")]
+position = Vector2(216, -672)
+
+[node name="water_plant9" parent="." unique_id=774938617 instance=ExtResource("5_uduus")]
+position = Vector2(178, -653)
+
+[node name="water_plant10" parent="." unique_id=662927773 instance=ExtResource("5_uduus")]
+position = Vector2(-337, -853)
+
+[node name="water_plant11" parent="." unique_id=766109331 instance=ExtResource("5_uduus")]
+position = Vector2(-685, 174)
+
+[node name="whale" parent="." unique_id=2052032726 instance=ExtResource("4_dtwrq")]
