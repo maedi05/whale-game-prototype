@@ -25,8 +25,6 @@ fin_angle = 0.3
 max_turn_speed = 3.5
 friction = 0.19
 max_speed = 270.0
-enable_bullets = false
-enable_circle_attack = false
 circle_max_radius = 500.0
 circle_grow_duration = 0.6
 circle_cooldown = 0.6
@@ -76,9 +74,6 @@ default_color = Color(0, 0, 0, 1)
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 
-[node name="bullet_mouth" type="Node2D" parent="." unique_id=1611926826]
-position = Vector2(0, -164)
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1122029630]
 visible = false
 position = Vector2(-5.364418e-07, 0)
@@ -87,3 +82,5 @@ texture = SubResource("PlaceholderTexture2D_4ybl7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1528619751]
 shape = SubResource("CircleShape2D_d14bn")
+
+[node name="bullet_mouth" type="Node2D" parent="." unique_id=1611926826]

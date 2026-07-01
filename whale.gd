@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 # ---- Nodes ----
 @onready var body: Line2D = $body
@@ -32,7 +32,7 @@ extends Node2D
 @export var circle_cooldown: float = 1.0
 @export var circle_attach_point: int = 0
 
-var velocity: Vector2 = Vector2.ZERO
+var velocity_m: Vector2 = Vector2.ZERO
 var heading: Vector2 = Vector2.UP
 
 # Bullet stuff
@@ -202,7 +202,7 @@ func fire():
 	var angle_to_mouse = (mouse_pos - global_position).angle()
 	
 	bullet.dir = angle_to_mouse
-	bullet.pos = $Node2D.global_position
+	bullet.pos = $bullet_mouth.global_position
 	bullet.rota = angle_to_mouse
 	get_parent().add_child(bullet)
 
