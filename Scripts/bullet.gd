@@ -19,7 +19,7 @@ func _ready():
 	timer.start()
 	timer.timeout.connect(queue_free)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Vector2(speed, 0).rotated(dir)
 	move_and_slide()
 	
