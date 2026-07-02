@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 2000.0
+@export var speed: float = 1000.0
 @export var lifetime: float = 2.0   # seconds before auto‑destroy
 
 var pos: Vector2

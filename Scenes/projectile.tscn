@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bketn1lg7lyiw"]
 
-[ext_resource type="Texture2D" uid="uid://dmrh8p7bfsx71" path="res://Sprites/Game elements/Effects/attack placeholder.png" id="1_f8cdk"]
+[ext_resource type="Texture2D" uid="uid://dmrh8p7bfsx71" path="res://Sprites/Game elements/Projectiles/attack placeholder.png" id="1_f8cdk"]
 [ext_resource type="Script" uid="uid://ctwy0qbpqbi1o" path="res://Scripts/projectile.gd" id="1_yr2qt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr2qt"]

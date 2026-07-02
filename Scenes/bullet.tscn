@@ -1,19 +1,30 @@
 [gd_scene format=3 uid="uid://cceekhmnjvavr"]
 
 [ext_resource type="Script" uid="uid://bg70pi1pswd3" path="res://Scripts/bullet.gd" id="1_oduel"]
-[ext_resource type="Texture2D" uid="uid://dmrh8p7bfsx71" path="res://Sprites/Game elements/Effects/attack placeholder.png" id="2_ycag2"]
+[ext_resource type="Texture2D" uid="uid://df8goav1av8sk" path="res://Sprites/Game elements/Projectiles/Bullet1.svg" id="2_oduel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ybl7"]
 size = Vector2(63, 127)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=427414620]
-collision_mask = 5
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d14bn"]
+size = Vector2(63, 127)
+
+[node name="Bullet" type="CharacterBody2D" unique_id=427414620]
+collision_layer = 16
+collision_mask = 13
 script = ExtResource("1_oduel")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1635545227]
-scale = Vector2(0.21500002, 0.21500002)
-texture = ExtResource("2_ycag2")
+position = Vector2(8.999998, -14)
+scale = Vector2(0.08348128, 0.08348128)
+texture = ExtResource("2_oduel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1277480558]
 position = Vector2(6.5, -7.5)
 shape = SubResource("RectangleShape2D_4ybl7")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1095999948]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1678323590]
+position = Vector2(6.5, -7.5)
+shape = SubResource("RectangleShape2D_d14bn")
