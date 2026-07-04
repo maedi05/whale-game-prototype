@@ -35,7 +35,7 @@ metadata/_custom_type_script = "uid://ct1bbwqhdd7c8"
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 width = 50.0
 width_curve = SubResource("Curve_sweem")
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0.75686276, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -44,32 +44,32 @@ end_cap_mode = 2
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
 width = 20.0
 width_curve = ExtResource("2_ltmiw")
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0.75686276, 1)
 
 [node name="limb_right" type="Line2D" parent="." unique_id=1165367975]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
 width = 20.0
 width_curve = ExtResource("2_ltmiw")
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0.75686276, 1)
 
 [node name="fin" type="Line2D" parent="." unique_id=1114453408]
 visible = false
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
 width = 20.0
 width_curve = SubResource("Curve_us4b6")
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0.75686276, 1)
 
 [node name="fin_left" type="Line2D" parent="." unique_id=744981923]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 width = 15.0
 width_curve = ExtResource("3_ltmiw")
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0.75686276, 1)
 
 [node name="fin_right" type="Line2D" parent="." unique_id=1497950488]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 width = 15.0
 width_curve = ExtResource("3_ltmiw")
-default_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0.75686276, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=942010642]
 zoom = Vector2(1.5, 1.5)

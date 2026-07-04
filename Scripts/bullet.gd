@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 1000.0
 @export var lifetime: float = 2.0   # seconds before auto‑destroy
+@export var growth_rate: float = 0.5 # seconds for growing the bullet to its set size :)
 
 var pos: Vector2
 var rota: float
@@ -26,3 +27,6 @@ func _physics_process(_delta):
 	# If we hit something, destroy the bullet
 	if get_last_slide_collision():
 		queue_free()
+
+func _process(delta):
+	scale += Vector2(growth_rate, growth_rate) * delta
